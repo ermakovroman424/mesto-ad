@@ -1,29 +1,35 @@
-const handleEscUp = (evt) => {
-  if (evt.key === "Escape") {
-    const activePopup = document.querySelector(".popup_is-opened");
-    closeModalWindow(activePopup);
+// Обработка нажатия клавиши Esc
+const closeByEscape = (e) => {
+  if (e.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_is-opened");
+    if (openedPopup) {
+      closeModalWindow(openedPopup);
+    }
   }
 };
 
-export const openModalWindow = (modalWindow) => {
-  modalWindow.classList.add("popup_is-opened");
-  document.addEventListener("keyup", handleEscUp);
+// Функция открытия попапа
+export const openModalWindow = (popupElement) => {
+  popupElement.classList.add("popup_is-opened");
+  document.addEventListener("keyup", closeByEscape);
 };
 
-export const closeModalWindow = (modalWindow) => {
-  modalWindow.classList.remove("popup_is-opened");
-  document.removeEventListener("keyup", handleEscUp);
+// Функция закрытия попапа
+export const closeModalWindow = (popupElement) => {
+  popupElement.classList.remove("popup_is-opened");
+  document.removeEventListener("keyup", closeByEscape);
 };
 
-export const setCloseModalWindowEventListeners = (modalWindow) => {
-  const closeButtonElement = modalWindow.querySelector(".popup__close")
-  closeButtonElement.addEventListener("click", () => {
-    closeModalWindow(modalWindow);
-  });
+// Установка базовых слушателей на закрытие (крестик и клик мимо)
+export const setCloseModalWindowEventListeners = (popupElement) => {
+  const btnClose = popupElement.querySelector(".popup__close");
+  
+  btnClose.addEventListener("click", () => closeModalWindow(popupElement));
 
-  modalWindow.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup")) {
-      closeModalWindow(modalWindow);
+  popupElement.addEventListener("mousedown", (e) => {
+    // Если клик пришелся строго на фон (оверлей), закрываем модалку
+    if (e.target.classList.contains("popup")) {
+      closeModalWindow(popupElement);
     }
   });
-}
+};
