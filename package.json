@@ -1,0 +1,23 @@
+{
+  "name": "mesto-ad",
+  "version": "1.0.0",
+  "description": "Финальная проектная работа на сборщике Vite",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "deploy": "gh-pages -d dist"
+  },
+  "keywords": [
+    "mesto",
+    "javascript",
+    "vite"
+  ],
+  "author": "ermakovroman424",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "vite": "^7.3.1",
+    "gh-pages": "^6.1.1"
+  }
+}
